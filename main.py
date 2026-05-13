@@ -24,6 +24,12 @@ class GlossaryTerm(BaseModel):
     category: TermCategory = Field(..., example="frontend")
     see_also: Optional[List[int]] = Field(None, example=[105, 202], description="IDs of related glossary entries.")
 
+    @validator('id', pre=True)
+    def id_no_booleans(cls, v):
+        if isinstance(v, bool):
+            raise ValueError('id must be an integer, not a boolean')
+        return v
+
     @validator('see_also', each_item=True, pre=True)
     def see_also_no_booleans(cls, v):
         if isinstance(v, bool):
