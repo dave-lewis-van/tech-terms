@@ -1,2 +1,8 @@
 .DS_Store
 Thumbs.db
+venv/
+node_modules/
+__pycache__/
+*.pyc
+dist/
+openapi.json

@@ -1,0 +1,13 @@
+extends: ["spectral:oas"]
+rules:
+  operation-summary-required:
+    description: "Every operation must have a summary for the ReadMe sidebar."
+    given: "$.paths[*][*]"
+    then:
+      field: summary
+      function: truthy
+    severity: error
+
+  info-description: error
+
+  operation-tags: error
