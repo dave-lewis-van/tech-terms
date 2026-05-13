@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(./node_modules/.bin/tsc --noEmit)",
+      "Bash(gh repo *)",
+      "Bash(gh issue create --title 'Enhance full-text search to match on definition text' --body ' *)"
+    ]
+  }
+}
