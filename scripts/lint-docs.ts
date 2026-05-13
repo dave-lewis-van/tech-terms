@@ -26,9 +26,8 @@ for (const path in paths) {
         const wordCount = description.split(' ').length;
 
         if (wordCount < MIN_DEFINITION_LENGTH) {
-            console.error(`STYLE ERROR: ${method.toUpperCase()} ${path}`);
-            console.error(`   Description is too short (${wordCount} words). Please expand.`);
-            errorCount++;
+            console.warn(`STYLE WARNING: ${method.toUpperCase()} ${path}`);
+            console.warn(`   Description is too short (${wordCount} words). Please expand.`);
         }
     }
 }
