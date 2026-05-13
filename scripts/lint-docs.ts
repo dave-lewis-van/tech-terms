@@ -1,6 +1,7 @@
 import * as fs from 'fs';
+import { parse } from '@stoplight/yaml';
 
-const spec = JSON.parse(fs.readFileSync('./openapi.json', 'utf8'));
+const spec = parse(fs.readFileSync('./reference/openapi.yaml', 'utf8')) as any;
 let errorCount = 0;
 
 console.log("--- Documentation Quality Audit ---");

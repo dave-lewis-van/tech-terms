@@ -39,7 +39,7 @@ After modifying `main.py`, regenerate the spec:
 python gen_openapi.py
 ```
 
-This writes `reference/openapi.yaml` (committed, picked up by ReadMe sync) and `openapi.json` (local only, used by `lint-docs.ts`).
+This writes `reference/openapi.yaml`, which is committed and picked up by ReadMe sync and `lint-docs.ts`.
 
 ## Linting the Spec
 
@@ -58,7 +58,7 @@ schemathesis run ./reference/openapi.yaml --url http://localhost:3000
 
 On every push to `v1.0`, GitHub Actions runs:
 
-1. **Generate** — rebuilds `openapi.json` from the FastAPI app
+1. **Generate** — rebuilds `reference/openapi.yaml` from the FastAPI app
 2. **Lint** — checks doc quality (`lint-docs.ts`) and validates the spec against Spectral rules
 3. **Contract test** — runs Schemathesis against the live API
 
