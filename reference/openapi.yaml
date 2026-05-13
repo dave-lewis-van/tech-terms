@@ -18,11 +18,7 @@ paths:
           in: query
           required: false
           schema:
-            anyOf:
-              - $ref: '#/components/schemas/TermCategory'
-              - type: 'null'
-            description: Filter terms by technical domain.
-            title: Category
+            $ref: '#/components/schemas/TermCategory'
           description: Filter terms by technical domain.
         - name: search
           in: query
@@ -69,6 +65,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlossaryTerm'
+        '400':
+          description: Bad Request
         '422':
           description: Validation Error
           content:
@@ -98,6 +96,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlossaryTerm'
+        '404':
+          description: Term not found
         '422':
           description: Validation Error
           content:

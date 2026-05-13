@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException, Query, Path
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from enum import Enum
 from typing import List, Optional
 
@@ -23,6 +23,12 @@ class GlossaryTerm(BaseModel):
     definition: str = Field(..., example="The process of attaching event listeners to static HTML.", description="A concise, technical explanation of the term.")
     category: TermCategory = Field(..., example="frontend")
     see_also: Optional[List[int]] = Field(None, example=[105, 202], description="IDs of related glossary entries.")
+
+    @validator('see_also', each_item=True)
+    def see_also_no_booleans(cls, v):
+        if isinstance(v, bool):
+            raise ValueError('see_also items must be integers')
+        return v
 
 # --- MOCK DATABASE ---
 
