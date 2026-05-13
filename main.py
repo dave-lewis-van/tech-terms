@@ -51,13 +51,15 @@ async def get_terms(
         results = [t for t in results if search.lower() in t["term"].lower()]
     return results
 
-@app.post("/terms", response_model=GlossaryTerm, status_code=201, tags=["Glossary Management"])
+@app.post("/terms", response_model=GlossaryTerm, status_code=201, tags=["Glossary Management"],
+          responses={400: {"description": "Bad Request"}})
 async def create_term(term: GlossaryTerm):
     """Register a new technical term in the glossary."""
     glossary_db.append(term.dict())
     return term
 
-@app.get("/terms/{id}", response_model=GlossaryTerm, tags=["Glossary Management"])
+@app.get("/terms/{id}", response_model=GlossaryTerm, tags=["Glossary Management"],
+         responses={404: {"description": "Term not found"}})
 async def get_term(id: int = Path(..., description="The unique numeric ID of the glossary term.")):
     """Fetch a specific term by its ID."""
     term = next((t for t in glossary_db if t["id"] == id), None)
