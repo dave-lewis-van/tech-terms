@@ -24,7 +24,7 @@ class GlossaryTerm(BaseModel):
     category: TermCategory = Field(..., example="frontend")
     see_also: Optional[List[int]] = Field(None, example=[105, 202], description="IDs of related glossary entries.")
 
-    @validator('see_also', each_item=True)
+    @validator('see_also', each_item=True, pre=True)
     def see_also_no_booleans(cls, v):
         if isinstance(v, bool):
             raise ValueError('see_also items must be integers')
