@@ -1,7 +1,6 @@
 ---
 title: Getting Started
 excerpt: Make your first Technical Terms API call in under a minute.
-api_config: getting-started
 hidden: false
 icon: icon-book1
 ---
