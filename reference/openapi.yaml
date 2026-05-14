@@ -1,35 +1,37 @@
 openapi: 3.1.0
 info:
   title: Technical Terms API
-  description: >-
-    A centralized programmatic 'Source of Truth' for technical terminology used
-    in documentation engineering.
+  description: A centralized programmatic 'Source of Truth' for technical terminology
+    used in documentation engineering.
   version: 1.0.0
+servers:
+  - url: https://tech-terms-api-production.up.railway.app
+    description: Production
 paths:
   /terms:
     get:
       tags:
-        - Glossary Management
+      - Glossary Management
       summary: Get Terms
       description: Retrieve a list of technical terms with optional filtering.
       operationId: get_terms_terms_get
       parameters:
-        - name: category
-          in: query
-          required: false
-          schema:
-            $ref: '#/components/schemas/TermCategory'
-          description: Filter terms by technical domain.
-        - name: search
-          in: query
-          required: false
-          schema:
-            anyOf:
-              - type: string
-              - type: 'null'
-            description: Search terms and definitions by keyword.
-            title: Search
+      - name: category
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/TermCategory'
+        description: Filter terms by technical domain.
+      - name: search
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
           description: Search terms and definitions by keyword.
+          title: Search
+        description: Search terms and definitions by keyword.
       responses:
         '200':
           description: Successful Response
@@ -48,7 +50,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-        - Glossary Management
+      - Glossary Management
       summary: Create Term
       description: Register a new technical term in the glossary.
       operationId: create_term_terms_post
@@ -76,19 +78,19 @@ paths:
   /terms/{id}:
     get:
       tags:
-        - Glossary Management
+      - Glossary Management
       summary: Get Term
       description: Fetch a specific term by its ID.
       operationId: get_term_terms__id__get
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            description: The unique numeric ID of the glossary term.
-            title: Id
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
           description: The unique numeric ID of the glossary term.
+          title: Id
+        description: The unique numeric ID of the glossary term.
       responses:
         '200':
           description: Successful Response
@@ -127,21 +129,21 @@ components:
           example: frontend
         see_also:
           anyOf:
-            - items:
-                type: integer
-              type: array
-            - type: 'null'
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
           title: See Also
           description: IDs of related glossary entries.
           example:
-            - 105
-            - 202
+          - 105
+          - 202
       type: object
       required:
-        - id
-        - term
-        - definition
-        - category
+      - id
+      - term
+      - definition
+      - category
       title: GlossaryTerm
     HTTPValidationError:
       properties:
@@ -155,18 +157,18 @@ components:
     TermCategory:
       type: string
       enum:
-        - frontend
-        - backend
-        - devops
-        - docs-as-code
+      - frontend
+      - backend
+      - devops
+      - docs-as-code
       title: TermCategory
     ValidationError:
       properties:
         loc:
           items:
             anyOf:
-              - type: string
-              - type: integer
+            - type: string
+            - type: integer
           type: array
           title: Location
         msg:
@@ -182,7 +184,7 @@ components:
           title: Context
       type: object
       required:
-        - loc
-        - msg
-        - type
+      - loc
+      - msg
+      - type
       title: ValidationError

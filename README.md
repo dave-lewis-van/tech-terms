@@ -54,6 +54,12 @@ uvicorn main:app --host 0.0.0.0 --port 3000 &
 schemathesis run ./reference/openapi.yaml --url http://localhost:3000
 ```
 
+The server runs in the background and persists after you close the terminal. To stop it:
+
+```bash
+kill $(lsof -ti :3000)
+```
+
 ## CI Pipeline
 
 On every push to `v1.0`, GitHub Actions runs:
