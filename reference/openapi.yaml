@@ -13,6 +13,10 @@ paths:
       tags:
       - Glossary Management
       summary: Get Terms
+      x-readme.sample-languages:
+        - curl
+        - javascript
+        - python
       description: Retrieve a list of technical terms with optional filtering.
       operationId: get_terms_terms_get
       parameters:
@@ -52,6 +56,10 @@ paths:
       tags:
       - Glossary Management
       summary: Create Term
+      x-readme.sample-languages:
+        - curl
+        - javascript
+        - python
       description: Register a new technical term in the glossary.
       operationId: create_term_terms_post
       requestBody:
@@ -80,6 +88,10 @@ paths:
       tags:
       - Glossary Management
       summary: Get Term
+      x-readme.sample-languages:
+        - curl
+        - javascript
+        - python
       description: Fetch a specific term by its ID.
       operationId: get_term_terms__id__get
       parameters:
