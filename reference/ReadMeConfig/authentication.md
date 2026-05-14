@@ -1,7 +1,6 @@
 ---
 title: Authentication
 excerpt: The Technical Terms API is publicly accessible — no credentials required.
-api_config: authentication
 hidden: false
 icon: icon-key1
 ---
