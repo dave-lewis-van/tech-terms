@@ -10,6 +10,11 @@ info:
 
     **Authentication:** None required. All endpoints are publicly accessible.
   version: 1.0.0
+  contact:
+    url: https://github.com/dave-lewis-van/tech-terms/issues
+tags:
+  - name: Glossary Management
+    description: Create and retrieve technical glossary terms.
 servers:
   - url: https://tech-terms-api-production.up.railway.app
     description: Production
