@@ -68,10 +68,18 @@ On every push to `v1.0`, GitHub Actions runs:
 2. **Lint** — checks doc quality (`lint-docs.ts`) and validates the spec against Spectral rules
 3. **Contract test** — runs Schemathesis against the live API
 
-## Endpoints
+## API Quick Reference
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/terms` | List all terms, with optional `category` and `search` filters |
-| `POST` | `/terms` | Register a new term |
-| `GET` | `/terms/{id}` | Fetch a term by ID |
+**Base URL:** `https://tech-terms-api-production.up.railway.app`
+
+**Authentication:** None required.
+
+### Endpoints
+
+| Method | Path | Parameters | Response |
+|---|---|---|---|
+| `GET` | `/terms` | `category` (enum), `search` (string, matches term name) | `200` array of terms |
+| `POST` | `/terms` | JSON body: `GlossaryTerm` | `201` created term; `422` validation error |
+| `GET` | `/terms/{id}` | `id` (integer, path) | `200` term; `404` not found |
+
+`GlossaryTerm` fields: `id` (integer, client-supplied), `term` (string), `definition` (string), `category` (enum), `see_also` (integer[], optional).

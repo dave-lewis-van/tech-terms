@@ -1,8 +1,14 @@
 openapi: 3.1.0
 info:
   title: Technical Terms API
-  description: A centralized programmatic 'Source of Truth' for technical terminology
-    used in documentation engineering.
+  description: |
+    A searchable glossary of technical terminology used in documentation engineering.
+    Terms are organized by domain — frontend, backend, devops, and docs-as-code — and
+    can be retrieved, filtered, and created via this API.
+
+    **Base URL:** `https://tech-terms-api-production.up.railway.app`
+
+    **Authentication:** None required. All endpoints are publicly accessible.
   version: 1.0.0
 servers:
   - url: https://tech-terms-api-production.up.railway.app
@@ -34,9 +40,9 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: Search terms and definitions by keyword.
+          description: Search term names by keyword (case-insensitive).
           title: Search
-        description: Search terms and definitions by keyword.
+        description: Search term names by keyword (case-insensitive).
       responses:
         '200':
           description: Successful Response
@@ -47,6 +53,17 @@ paths:
                 items:
                   $ref: '#/components/schemas/GlossaryTerm'
                 title: Response Get Terms Terms Get
+              example:
+                - id: 1
+                  term: SSG
+                  definition: Static Site Generator.
+                  category: docs-as-code
+                  see_also: []
+                - id: 101
+                  term: Hydration
+                  definition: The process of attaching event listeners to static HTML.
+                  category: frontend
+                  see_also: [105, 202]
         '422':
           description: Validation Error
           content:
@@ -67,19 +84,29 @@ paths:
               $ref: '#/components/schemas/GlossaryTerm'
       responses:
         '201':
-          description: Successful Response
+          description: Term created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlossaryTerm'
-        '400':
-          description: Bad Request
+              example:
+                id: 42
+                term: Tree Shaking
+                definition: The elimination of dead code from a JavaScript bundle at build time.
+                category: frontend
+                see_also: [101]
         '422':
-          description: Validation Error
+          description: Validation Error — missing required fields or invalid field values
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+              example:
+                detail:
+                  - loc: [body, category]
+                    msg: "value is not a valid enumeration member; permitted: 'frontend', 'backend', 'devops', 'docs-as-code'"
+                    type: type_error.enum
+                    input: cloud
   /terms/{id}:
     get:
       tags:
@@ -103,8 +130,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlossaryTerm'
+              example:
+                id: 101
+                term: Hydration
+                definition: The process of attaching event listeners to static HTML.
+                category: frontend
+                see_also: [105, 202]
         '404':
           description: Term not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+              example:
+                detail: Term not found
         '422':
           description: Validation Error
           content:

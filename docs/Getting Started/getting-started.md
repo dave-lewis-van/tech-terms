@@ -2,47 +2,40 @@
 title: Welcome to tech-terms
 hidden: false
 ---
-<Callout icon="📘" theme="info">
-  **Template:**  Delete this callout and edit this page with your content and links.
-</Callout>
+
+The Technical Terms API is a searchable glossary of terminology used across documentation engineering. Use it to retrieve, search, and manage consistent definitions for frontend, backend, DevOps, and docs-as-code concepts.
+
+**Base URL:** `https://tech-terms-api-production.up.railway.app`
+
+No authentication is required. All endpoints are publicly accessible.
 
 <Cards>
-  {/* Edit the props below to customize these components */}
-  <Card title="Quick Start" href="#" icon="fa-duotone fa-rocket-launch">Learn how to get started with our product</Card>
+  <Card title="Quick Start" href="ref:getting-started" icon="fa-duotone fa-rocket-launch">Make your first API call in under a minute</Card>
 
-  <Card title="API Reference" href="#" icon="fa-duotone fa-code-simple">Explore endpoints and build your integration</Card>
-
-  <Card title="Build with AI" href="#" icon="fa-duotone fa-sparkles">Use LLM features to automate your workflow</Card>
+  <Card title="API Reference" href="ref:glossary-management" icon="fa-duotone fa-code-simple">Explore all endpoints and parameters</Card>
 </Cards>
 
 <br />
 
-## Recent Releases
+## What You Can Do
 
 <Cards>
-  <Card isNew kind="tile" title="v2.0 Migration" href="#" icon="fa-duotone fa-magnifying-glass">Everything you need to upgrade</Card>
+  <Card kind="tile" title="List Terms" href="ref:get_terms_terms_get" icon="fa-duotone fa-list">Retrieve all terms, filtered by category or keyword</Card>
 
-  <Card kind="tile" title="Webhooks" href="#" icon="fa-duotone fa-bullhorn">Real-time events are now available</Card>
+  <Card kind="tile" title="Create a Term" href="ref:create_term_terms_post" icon="fa-duotone fa-plus">Add a new term to the glossary</Card>
 
-  <Card kind="tile" title="Android SDK" href="#" icon="fa-duotone fa-robot">Our native Android library is out of beta</Card>
+  <Card kind="tile" title="Fetch by ID" href="ref:get_term_terms__id__get" icon="fa-duotone fa-magnifying-glass">Retrieve a specific term by its numeric ID</Card>
 </Cards>
 
 <br />
 
-## The Basics
+## Term Categories
 
-<Cards>
-  <Card kind="tile" title="Customize" href="#" icon="fa-duotone fa-brush">Style the widget to match your brand</Card>
+Every term belongs to one of four technical domains:
 
-  <Card kind="tile" title="Integrations" href="#" icon="fa-duotone fa-arrow-down-left-and-arrow-up-right-to-center">Connect with third-party services</Card>
-
-  <Card kind="tile" title="CLI" href="#" icon="fa-duotone fa-terminal">Manage resources from your terminal</Card>
-
-  <Card kind="tile" title="Security" href="" icon="fa-duotone fa-shield-dog">Learn how we secure your data</Card>
-
-  <Card kind="tile" title="Common Issues" href="" icon="fa-duotone fa-file-circle-info">Troubleshoot common issues</Card>
-
-  <Card kind="tile" title="Sync" href="#" icon="fa-duotone fa-code-compare">Connect to a storage provider</Card>
-</Cards>
-
-<br />
+| Category | Description |
+|---|---|
+| `frontend` | Browser-side technologies: rendering, state, CSS |
+| `backend` | Server-side concepts: databases, APIs, services |
+| `devops` | Infrastructure, CI/CD, and deployment tooling |
+| `docs-as-code` | Documentation workflows, formats, and tooling |
