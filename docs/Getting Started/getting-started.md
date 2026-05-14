@@ -20,11 +20,11 @@ No authentication is required. All endpoints are publicly accessible.
 ## What You Can Do
 
 <Cards>
-  <Card kind="tile" title="List Terms" href="ref:get_terms_terms_get" icon="fa-duotone fa-list">Retrieve all terms, filtered by category or keyword</Card>
+  <Card kind="tile" title="List Terms" href="/reference/get_terms_terms_get" icon="fa-duotone fa-list">Retrieve all terms, filtered by category or keyword</Card>
 
-  <Card kind="tile" title="Create a Term" href="ref:create_term_terms_post" icon="fa-duotone fa-plus">Add a new term to the glossary</Card>
+  <Card kind="tile" title="Create a Term" href="/reference/create_term_terms_post" icon="fa-duotone fa-plus">Add a new term to the glossary</Card>
 
-  <Card kind="tile" title="Fetch by ID" href="ref:get_term_terms__id__get" icon="fa-duotone fa-magnifying-glass">Retrieve a specific term by its numeric ID</Card>
+  <Card kind="tile" title="Fetch by ID" href="/reference/get_term_terms__id__get" icon="fa-duotone fa-magnifying-glass">Retrieve a specific term by its numeric ID</Card>
 </Cards>
 
 <br />
