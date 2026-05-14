@@ -1,9 +1,11 @@
 ---
 title: Welcome to tech-terms
+excerpt: >-
+  The Technical Terms API is a searchable glossary of terminology used across
+  documentation engineering.
 hidden: false
 ---
-
-The Technical Terms API is a searchable glossary of terminology used across documentation engineering. Use it to retrieve, search, and manage consistent definitions for frontend, backend, DevOps, and docs-as-code concepts.
+Use it to retrieve, search, and manage consistent definitions for frontend, backend, DevOps, and docs-as-code concepts.
 
 **Base URL:** `https://tech-terms-api-production.up.railway.app`
 
@@ -33,9 +35,11 @@ No authentication is required. All endpoints are publicly accessible.
 
 Every term belongs to one of four technical domains:
 
-| Category | Description |
-|---|---|
-| `frontend` | Browser-side technologies: rendering, state, CSS |
-| `backend` | Server-side concepts: databases, APIs, services |
-| `devops` | Infrastructure, CI/CD, and deployment tooling |
-| `docs-as-code` | Documentation workflows, formats, and tooling |
+| Category       | Description                                      |
+| -------------- | ------------------------------------------------ |
+| `frontend`     | Browser-side technologies: rendering, state, CSS |
+| `backend`      | Server-side concepts: databases, APIs, services  |
+| `devops`       | Infrastructure, CI/CD, and deployment tooling    |
+| `docs-as-code` | Documentation workflows, formats, and tooling    |
+
+<br />
