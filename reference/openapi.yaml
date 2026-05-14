@@ -13,8 +13,8 @@ info:
   contact:
     url: https://github.com/dave-lewis-van/tech-terms/issues
 tags:
-  - name: Glossary Management
-    description: Create and retrieve technical glossary terms.
+  - name: Terms
+    description: Retrieve and create technical glossary terms.
 servers:
   - url: https://tech-terms-api-production.up.railway.app
     description: Production
@@ -27,7 +27,7 @@ paths:
   /terms:
     get:
       tags:
-      - Glossary Management
+      - Terms
       summary: Get Terms
       description: Retrieve a list of technical terms with optional filtering.
       operationId: get_terms_terms_get
@@ -77,7 +77,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - Glossary Management
+      - Terms
       summary: Create Term
       description: Register a new technical term in the glossary.
       operationId: create_term_terms_post
@@ -115,7 +115,7 @@ paths:
   /terms/{id}:
     get:
       tags:
-      - Glossary Management
+      - Terms
       summary: Get Term
       description: Fetch a specific term by its ID.
       operationId: get_term_terms__id__get

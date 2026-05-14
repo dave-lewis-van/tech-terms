@@ -1,1 +1,3 @@
-- glossary-management
+- get_terms_terms_get
+- create_term_terms_post
+- get_term_terms__id__get
