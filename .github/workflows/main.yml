@@ -3,6 +3,8 @@ name: API Documentation Pipeline
 on:
   push:
     branches: [ v1.0 ]
+  pull_request:
+    branches: [ v1.0 ]
   workflow_dispatch:
 
 jobs:
@@ -26,6 +28,9 @@ jobs:
         run: |
           python gen_openapi.py
 
+      - name: Check spec is up to date
+        run: git diff --exit-code reference/openapi.yaml
+
       # 2. LINTING: Doc quality checks and OpenAPI spec validation
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -47,8 +52,7 @@ jobs:
       - name: Run Schemathesis Tests
         run: |
           uvicorn main:app --host 0.0.0.0 --port 3000 &
-          sleep 5
-          schemathesis run ./reference/openapi.yaml --url http://localhost:3000 | tee schemathesis-report.txt
+          schemathesis run ./reference/openapi.yaml --url http://localhost:3000 --wait-for-schema 30 | tee schemathesis-report.txt
 
       - name: Upload Schemathesis Report
         if: always()

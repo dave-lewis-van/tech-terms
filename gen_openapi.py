@@ -1,5 +1,9 @@
+import os
 import yaml
 from main import app
+
+# Fields manually maintained in reference/openapi.yaml that gen_openapi.py must not overwrite.
+PRESERVED_FIELDS = ["servers", "x-readme"]
 
 def generate_spec():
     openapi_schema = app.openapi()
@@ -11,7 +15,15 @@ def generate_spec():
             param["schema"] = {"$ref": "#/components/schemas/TermCategory"}
             break
 
-    with open("reference/openapi.yaml", "w") as f:
+    existing_path = "reference/openapi.yaml"
+    if os.path.exists(existing_path):
+        with open(existing_path) as f:
+            existing = yaml.safe_load(f) or {}
+        for field in PRESERVED_FIELDS:
+            if field in existing:
+                openapi_schema[field] = existing[field]
+
+    with open(existing_path, "w") as f:
         yaml.dump(openapi_schema, f, sort_keys=False)
     print("Successfully generated reference/openapi.yaml")
 
