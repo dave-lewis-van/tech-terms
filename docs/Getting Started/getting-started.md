@@ -10,9 +10,9 @@ The Technical Terms API is a searchable glossary of terminology used across docu
 No authentication is required. All endpoints are publicly accessible.
 
 <Cards>
-  <Card title="Quick Start" href="ref:getting-started" icon="fa-duotone fa-rocket-launch">Make your first API call in under a minute</Card>
+  <Card title="Quick Start" href="/reference/getting-started" icon="fa-duotone fa-rocket-launch">Make your first API call in under a minute</Card>
 
-  <Card title="API Reference" href="ref:glossary-management" icon="fa-duotone fa-code-simple">Explore all endpoints and parameters</Card>
+  <Card title="API Reference" href="/reference/glossary-management" icon="fa-duotone fa-code-simple">Explore all endpoints and parameters</Card>
 </Cards>
 
 <br />
