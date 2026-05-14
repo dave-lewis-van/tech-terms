@@ -4,14 +4,14 @@ info:
   description: A centralized programmatic 'Source of Truth' for technical terminology
     used in documentation engineering.
   version: 1.0.0
+servers:
+  - url: https://tech-terms-api-production.up.railway.app
+    description: Production
 x-readme:
   samples-languages:
     - curl
     - javascript
     - python
-  servers:
-  - url: https://tech-terms-api-production.up.railway.app
-    description: Production
 paths:
   /terms:
     get:
