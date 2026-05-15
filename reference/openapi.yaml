@@ -102,7 +102,52 @@ paths:
                     ''backend'', ''devops'', ''docs-as-code'''
                   type: type_error.enum
                   input: cloud
-          description: Unprocessable Entity
+          description: Unprocessable Content
+  /terms/bulk:
+    post:
+      tags:
+      - Terms
+      summary: Bulk Import Terms
+      description: Import multiple terms in a single request, returning a per-item
+        result for each entry.
+      operationId: bulk_import_terms_terms_bulk_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items: {}
+              type: array
+              title: Items
+        required: true
+      responses:
+        '207':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BulkImportResult'
+                type: array
+                title: Response Bulk Import Terms Terms Bulk Post
+              example:
+              - index: 0
+                status: created
+                id: 11
+              - index: 1
+                status: error
+                detail: Term with ID 1 already exists.
+        '400':
+          description: Empty request body
+          content:
+            application/json:
+              example:
+                detail: Request body must contain at least one term.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /terms/{id}:
     get:
       tags:
@@ -148,6 +193,29 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    BulkImportResult:
+      properties:
+        index:
+          type: integer
+          title: Index
+        status:
+          type: string
+          title: Status
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+        detail:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Detail
+      type: object
+      required:
+      - index
+      - status
+      title: BulkImportResult
     GlossaryTerm:
       properties:
         id:
