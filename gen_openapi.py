@@ -15,6 +15,13 @@ def generate_spec():
             param["schema"] = {"$ref": "#/components/schemas/TermCategory"}
             break
 
+    # Empty array is schema-valid but rejected by the endpoint; add minItems so Schemathesis won't generate it.
+    bulk_schema = (openapi_schema.get("paths", {}).get("/terms/bulk", {})
+                   .get("post", {}).get("requestBody", {})
+                   .get("content", {}).get("application/json", {}).get("schema", {}))
+    if bulk_schema.get("type") == "array":
+        bulk_schema["minItems"] = 1
+
     # Starlette changed the 422 description between versions; normalise to the RFC 4918 string.
     for path_item in openapi_schema.get("paths", {}).values():
         for operation in path_item.values():

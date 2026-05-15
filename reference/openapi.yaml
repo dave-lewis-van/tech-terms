@@ -90,6 +90,12 @@ paths:
                 category: frontend
                 see_also:
                 - 101
+        '400':
+          description: Malformed JSON body
+          content:
+            application/json:
+              example:
+                detail: There was an error parsing the body
         '422':
           content:
             application/json:
@@ -118,6 +124,7 @@ paths:
               items: {}
               type: array
               title: Items
+              minItems: 1
         required: true
       responses:
         '207':

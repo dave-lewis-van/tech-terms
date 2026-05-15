@@ -1,6 +1,7 @@
 import json
 from pathlib import Path as FilePath
 from fastapi import FastAPI, HTTPException, Query, Path, Body
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, ValidationError, validator
 from enum import Enum
 from typing import Any, List, Optional
@@ -101,6 +102,7 @@ async def get_terms(
     201: {"content": {"application/json": {"example":
         {"id": 42, "term": "Tree Shaking", "definition": "The elimination of dead code from a JavaScript bundle at build time.", "category": "frontend", "see_also": [101]},
     }}},
+    400: {"description": "Malformed JSON body", "content": {"application/json": {"example": {"detail": "There was an error parsing the body"}}}},
     422: {"content": {"application/json": {"example":
         {"detail": [{"loc": ["body", "category"], "msg": "value is not a valid enumeration member; permitted: 'frontend', 'backend', 'devops', 'docs-as-code'", "type": "type_error.enum", "input": "cloud"}]},
     }}},
@@ -151,6 +153,10 @@ async def bulk_import_terms(items: List[Any] = Body(...)):
         _save(glossary_db)
 
     return results
+
+@app.api_route("/terms/bulk", methods=["GET", "PUT", "PATCH", "DELETE"], include_in_schema=False)
+async def bulk_method_not_allowed():
+    return JSONResponse(status_code=405, content={"detail": "Method Not Allowed"}, headers={"Allow": "POST"})
 
 @app.get("/terms/{id}", response_model=GlossaryTerm, tags=["Terms"], responses={
     200: {"content": {"application/json": {"example":
