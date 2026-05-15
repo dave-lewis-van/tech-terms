@@ -2,8 +2,71 @@
   {
     "id": 1,
     "term": "SSG",
-    "definition": "Static Site Generator.",
+    "definition": "Static Site Generator. A tool that pre-renders web pages at build time into static HTML files.",
     "category": "docs-as-code",
-    "see_also": []
+    "see_also": [2, 3]
+  },
+  {
+    "id": 2,
+    "term": "SSR",
+    "definition": "Server-Side Rendering. A technique where HTML is generated on the server per request rather than in the browser.",
+    "category": "frontend",
+    "see_also": [1, 3]
+  },
+  {
+    "id": 3,
+    "term": "Hydration",
+    "definition": "The process of attaching JavaScript event listeners and state to static HTML already rendered on the server or at build time.",
+    "category": "frontend",
+    "see_also": [1, 2]
+  },
+  {
+    "id": 4,
+    "term": "CI/CD",
+    "definition": "Continuous Integration / Continuous Delivery. The practice of automating build, test, and deployment pipelines on every code change.",
+    "category": "devops",
+    "see_also": [5]
+  },
+  {
+    "id": 5,
+    "term": "Pipeline",
+    "definition": "An automated sequence of steps (build, test, deploy) triggered by a code event such as a push or pull request.",
+    "category": "devops",
+    "see_also": [4]
+  },
+  {
+    "id": 6,
+    "term": "Docs-as-Code",
+    "definition": "An approach to writing documentation using the same tools and workflows as software development: version control, pull requests, and automated publishing.",
+    "category": "docs-as-code",
+    "see_also": [1, 7]
+  },
+  {
+    "id": 7,
+    "term": "DITA",
+    "definition": "Darwin Information Typing Architecture. An XML standard for structuring technical documentation into reusable topic types: task, concept, and reference.",
+    "category": "docs-as-code",
+    "see_also": [6]
+  },
+  {
+    "id": 8,
+    "term": "REST",
+    "definition": "Representational State Transfer. An architectural style for APIs that uses HTTP methods and stateless, resource-based URLs.",
+    "category": "backend",
+    "see_also": [9, 10]
+  },
+  {
+    "id": 9,
+    "term": "OpenAPI",
+    "definition": "A specification format for describing REST APIs in a machine-readable YAML or JSON document, enabling documentation generation and contract testing.",
+    "category": "backend",
+    "see_also": [8]
+  },
+  {
+    "id": 10,
+    "term": "Tree Shaking",
+    "definition": "The elimination of dead (unreachable) code from a JavaScript bundle at build time, reducing final bundle size.",
+    "category": "frontend",
+    "see_also": [3]
   }
 ]
