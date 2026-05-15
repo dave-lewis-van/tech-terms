@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "term": "SSG",
+    "definition": "Static Site Generator.",
+    "category": "docs-as-code",
+    "see_also": []
+  }
+]

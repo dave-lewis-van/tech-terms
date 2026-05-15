@@ -1,28 +1,14 @@
 openapi: 3.1.0
 info:
   title: Technical Terms API
-  description: |
-    A searchable glossary of technical terminology used in documentation engineering.
-    Terms are organized by domain — frontend, backend, devops, and docs-as-code — and
-    can be retrieved, filtered, and created via this API.
-
-    **Base URL:** `https://tech-terms-api-production.up.railway.app`
-
-    **Authentication:** None required. All endpoints are publicly accessible.
-  version: 1.0.0
+  description: "A searchable glossary of technical terminology used in documentation\
+    \ engineering. Terms are organized by domain \u2014 frontend, backend, devops,\
+    \ and docs-as-code \u2014 and can be retrieved, filtered, and created via this\
+    \ API.\n\n**Base URL:** `https://tech-terms-api-production.up.railway.app`\n\n\
+    **Authentication:** None required. All endpoints are publicly accessible."
   contact:
     url: https://github.com/dave-lewis-van/tech-terms/issues
-tags:
-  - name: Terms
-    description: Retrieve and create technical glossary terms.
-servers:
-  - url: https://tech-terms-api-production.up.railway.app
-    description: Production
-x-readme:
-  samples-languages:
-    - curl
-    - javascript
-    - python
+  version: 1.0.0
 paths:
   /terms:
     get:
@@ -59,16 +45,18 @@ paths:
                   $ref: '#/components/schemas/GlossaryTerm'
                 title: Response Get Terms Terms Get
               example:
-                - id: 1
-                  term: SSG
-                  definition: Static Site Generator.
-                  category: docs-as-code
-                  see_also: []
-                - id: 101
-                  term: Hydration
-                  definition: The process of attaching event listeners to static HTML.
-                  category: frontend
-                  see_also: [105, 202]
+              - id: 1
+                term: SSG
+                definition: Static Site Generator.
+                category: docs-as-code
+                see_also: []
+              - id: 101
+                term: Hydration
+                definition: The process of attaching event listeners to static HTML.
+                category: frontend
+                see_also:
+                - 105
+                - 202
         '422':
           description: Validation Error
           content:
@@ -89,7 +77,7 @@ paths:
               $ref: '#/components/schemas/GlossaryTerm'
       responses:
         '201':
-          description: Term created successfully
+          description: Successful Response
           content:
             application/json:
               schema:
@@ -97,21 +85,24 @@ paths:
               example:
                 id: 42
                 term: Tree Shaking
-                definition: The elimination of dead code from a JavaScript bundle at build time.
+                definition: The elimination of dead code from a JavaScript bundle
+                  at build time.
                 category: frontend
-                see_also: [101]
+                see_also:
+                - 101
         '422':
-          description: Validation Error — missing required fields or invalid field values
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
               example:
                 detail:
-                  - loc: [body, category]
-                    msg: "value is not a valid enumeration member; permitted: 'frontend', 'backend', 'devops', 'docs-as-code'"
-                    type: type_error.enum
-                    input: cloud
+                - loc:
+                  - body
+                  - category
+                  msg: 'value is not a valid enumeration member; permitted: ''frontend'',
+                    ''backend'', ''devops'', ''docs-as-code'''
+                  type: type_error.enum
+                  input: cloud
+          description: Unprocessable Content
   /terms/{id}:
     get:
       tags:
@@ -140,16 +131,13 @@ paths:
                 term: Hydration
                 definition: The process of attaching event listeners to static HTML.
                 category: frontend
-                see_also: [105, 202]
+                see_also:
+                - 105
+                - 202
         '404':
           description: Term not found
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  detail:
-                    type: string
               example:
                 detail: Term not found
         '422':
@@ -240,3 +228,14 @@ components:
       - msg
       - type
       title: ValidationError
+tags:
+- name: Terms
+  description: Retrieve and create technical glossary terms.
+servers:
+- url: https://tech-terms-api-production.up.railway.app
+  description: Production
+x-readme:
+  samples-languages:
+  - curl
+  - javascript
+  - python

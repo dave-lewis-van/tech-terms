@@ -45,6 +45,8 @@ curl -X POST https://tech-terms-api-production.up.railway.app/terms \
 
 **Note on `id`:** IDs are client-supplied. The API does not auto-increment or enforce uniqueness — submitting a duplicate ID will create a duplicate entry. Auto-increment IDs are planned for a future release.
 
+**Note on persistence:** Created terms are saved to a `terms.json` file on the server and survive restarts. However, the production server runs on Railway, which uses an ephemeral filesystem — terms will be lost if the server is redeployed.
+
 ## Error Response (`422 Unprocessable Entity`)
 
 Returned when the request body is missing required fields or contains invalid values:

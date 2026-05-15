@@ -4,16 +4,16 @@ A centralized source of truth for technical terminology used in documentation en
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| API framework | FastAPI (Python) |
-| Data validation | Pydantic |
-| API server | Uvicorn |
-| OpenAPI spec | Auto-generated via `gen_openapi.py` |
-| API linting | Spectral (`@stoplight/spectral-cli`) |
-| Contract testing | Schemathesis |
-| Documentation | ReadMe (GitHub sync from `reference/openapi.yaml`) |
-| CI/CD | GitHub Actions |
+| Layer | Technology | Description |
+|---|---|---|
+| API framework | [FastAPI](https://fastapi.tiangolo.com) (Python) | High-performance Python web framework for building APIs with automatic OpenAPI schema generation. Leverages Python type hints for request/response validation. |
+| Data validation | [Pydantic](https://docs.pydantic.dev) | Data validation library that uses Python type annotations to enforce schemas at runtime. Powers FastAPI's request parsing and response serialization. |
+| API server | [Uvicorn](https://www.uvicorn.org) | Lightweight ASGI server used to serve the FastAPI app locally and in CI. Supports hot reload during development via `--reload`. |
+| OpenAPI spec | Auto-generated via `gen_openapi.py` | — |
+| API linting | [Spectral](https://docs.stoplight.io/docs/spectral) (`@stoplight/spectral-cli`) | OpenAPI linter that validates the spec against configurable ruleset. Catches style and contract issues before they reach consumers. |
+| Contract testing | [Schemathesis](https://schemathesis.readthedocs.io) | Property-based contract testing tool that auto-generates test cases from the OpenAPI spec and verifies the live API matches its contract. |
+| Documentation | ReadMe (GitHub sync from `reference/openapi.yaml`) | — |
+| CI/CD | GitHub Actions | — |
 
 ## Local Setup
 
