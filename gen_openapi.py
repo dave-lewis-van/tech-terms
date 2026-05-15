@@ -15,6 +15,14 @@ def generate_spec():
             param["schema"] = {"$ref": "#/components/schemas/TermCategory"}
             break
 
+    # Starlette changed the 422 description between versions; normalise to the RFC 4918 string.
+    for path_item in openapi_schema.get("paths", {}).values():
+        for operation in path_item.values():
+            if isinstance(operation, dict):
+                resp = operation.get("responses", {}).get("422", {})
+                if resp.get("description") == "Unprocessable Content":
+                    resp["description"] = "Unprocessable Entity"
+
     existing_path = "reference/openapi.yaml"
     if os.path.exists(existing_path):
         with open(existing_path) as f:

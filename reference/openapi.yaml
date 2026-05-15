@@ -102,7 +102,7 @@ paths:
                     ''backend'', ''devops'', ''docs-as-code'''
                   type: type_error.enum
                   input: cloud
-          description: Unprocessable Content
+          description: Unprocessable Entity
   /terms/bulk:
     post:
       tags:
