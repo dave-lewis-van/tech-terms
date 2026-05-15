@@ -77,3 +77,4 @@ The search matches against term names only.
 - [List Terms](ref:get_terms_terms_get) — full parameter reference for `GET /terms`
 - [Create a Term](ref:create_term_terms_post) — add a new entry to the glossary
 - [Fetch by ID](ref:get_term_terms__id__get) — retrieve a specific term
+- [Bulk Import](ref:bulk_import_terms_terms_bulk_post) — add multiple terms in one request

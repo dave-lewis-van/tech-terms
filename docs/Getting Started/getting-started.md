@@ -27,6 +27,8 @@ No authentication is required. All endpoints are publicly accessible.
   <Card kind="tile" title="Create a Term" href="/reference/create_term_terms_post" icon="fa-duotone fa-plus">Add a new term to the glossary</Card>
 
   <Card kind="tile" title="Fetch by ID" href="/reference/get_term_terms__id__get" icon="fa-duotone fa-magnifying-glass">Retrieve a specific term by its numeric ID</Card>
+
+  <Card kind="tile" title="Bulk Import" href="/reference/bulk_import_terms_terms_bulk_post" icon="fa-duotone fa-layer-plus">Add multiple terms in a single request</Card>
 </Cards>
 
 <br />
