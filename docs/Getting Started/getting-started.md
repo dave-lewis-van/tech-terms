@@ -14,7 +14,7 @@ No authentication is required. All endpoints are publicly accessible.
 <Cards>
   <Card title="Quick Start" href="/reference/getting-started" icon="fa-duotone fa-rocket-launch">Make your first API call in under a minute</Card>
 
-  <Card title="API Reference" href="/reference/technical-terms-api/get-terms-terms-get" icon="fa-duotone fa-code-simple">Explore all endpoints and parameters</Card>
+  <Card title="API Reference" href="/reference/get_terms_terms_get" icon="fa-duotone fa-code-simple">Explore all endpoints and parameters</Card>
 </Cards>
 
 <br />
