@@ -1,9 +1,10 @@
 import json
 from pathlib import Path as FilePath
-from fastapi import FastAPI, HTTPException, Query, Path
-from pydantic import BaseModel, Field, validator
+from fastapi import FastAPI, HTTPException, Query, Path, Body
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field, ValidationError, validator
 from enum import Enum
-from typing import List, Optional
+from typing import Any, List, Optional
 
 app = FastAPI(
     title="Technical Terms API",
@@ -35,6 +36,12 @@ class TermCategory(str, Enum):
     backend = "backend"
     devops = "devops"
     docs_as_code = "docs-as-code"
+
+class BulkImportResult(BaseModel):
+    index: int
+    status: str
+    id: Optional[int] = None
+    detail: Optional[str] = None
 
 class GlossaryTerm(BaseModel):
     id: int = Field(..., example=101)
@@ -95,6 +102,7 @@ async def get_terms(
     201: {"content": {"application/json": {"example":
         {"id": 42, "term": "Tree Shaking", "definition": "The elimination of dead code from a JavaScript bundle at build time.", "category": "frontend", "see_also": [101]},
     }}},
+    400: {"description": "Malformed JSON body", "content": {"application/json": {"example": {"detail": "There was an error parsing the body"}}}},
     422: {"content": {"application/json": {"example":
         {"detail": [{"loc": ["body", "category"], "msg": "value is not a valid enumeration member; permitted: 'frontend', 'backend', 'devops', 'docs-as-code'", "type": "type_error.enum", "input": "cloud"}]},
     }}},
@@ -104,6 +112,51 @@ async def create_term(term: GlossaryTerm):
     glossary_db.append(term.dict())
     _save(glossary_db)
     return term
+
+@app.post("/terms/bulk", response_model=List[BulkImportResult], status_code=207, tags=["Terms"], responses={
+    207: {"content": {"application/json": {"example": [
+        {"index": 0, "status": "created", "id": 11},
+        {"index": 1, "status": "error", "detail": "Term with ID 1 already exists."},
+    ]}}},
+    400: {"description": "Empty request body", "content": {"application/json": {"example": {"detail": "Request body must contain at least one term."}}}},
+})
+async def bulk_import_terms(items: List[Any] = Body(...)):
+    """Import multiple terms in a single request, returning a per-item result for each entry."""
+    if not items:
+        raise HTTPException(status_code=400, detail="Request body must contain at least one term.")
+
+    results = []
+    seen_ids: set = set()
+    any_created = False
+
+    for i, item in enumerate(items):
+        try:
+            term = GlossaryTerm(**item)
+        except (ValidationError, TypeError) as e:
+            results.append(BulkImportResult(index=i, status="error", detail=str(e)))
+            continue
+
+        if term.id in seen_ids:
+            results.append(BulkImportResult(index=i, status="error", detail=f"Duplicate ID {term.id} in batch."))
+            continue
+
+        if any(t["id"] == term.id for t in glossary_db):
+            results.append(BulkImportResult(index=i, status="error", detail=f"Term with ID {term.id} already exists."))
+            continue
+
+        seen_ids.add(term.id)
+        glossary_db.append(term.dict())
+        any_created = True
+        results.append(BulkImportResult(index=i, status="created", id=term.id))
+
+    if any_created:
+        _save(glossary_db)
+
+    return results
+
+@app.api_route("/terms/bulk", methods=["GET", "PUT", "PATCH", "DELETE"], include_in_schema=False)
+async def bulk_method_not_allowed():
+    return JSONResponse(status_code=405, content={"detail": "Method Not Allowed"}, headers={"Allow": "POST"})
 
 @app.get("/terms/{id}", response_model=GlossaryTerm, tags=["Terms"], responses={
     200: {"content": {"application/json": {"example":

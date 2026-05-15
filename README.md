@@ -80,6 +80,7 @@ On every push to `v1.0`, GitHub Actions runs:
 |---|---|---|---|
 | `GET` | `/terms` | `category` (enum), `search` (string, matches term name) | `200` array of terms |
 | `POST` | `/terms` | JSON body: `GlossaryTerm` | `201` created term; `422` validation error |
+| `POST` | `/terms/bulk` | JSON body: array of `GlossaryTerm` | `207` per-item results; `400` empty array |
 | `GET` | `/terms/{id}` | `id` (integer, path) | `200` term; `404` not found |
 
 `GlossaryTerm` fields: `id` (integer, client-supplied), `term` (string), `definition` (string), `category` (enum), `see_also` (integer[], optional).
