@@ -16,7 +16,10 @@ app = FastAPI(
         "**Authentication:** None required. All endpoints are publicly accessible."
     ),
     version="1.0.0",
-    contact={"url": "https://github.com/dave-lewis-van/tech-terms/issues"},
+    contact={
+        "name": "tech-terms support",
+        "url": "https://github.com/dave-lewis-van/tech-terms/issues",
+        },
     openapi_tags=[{"name": "Terms", "description": "Retrieve and create technical glossary terms."}],
 )
 
